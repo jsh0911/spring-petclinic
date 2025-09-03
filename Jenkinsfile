@@ -36,7 +36,7 @@ pipeline {
     }
     stage('Docker Image Push') {
       steps {
-        sh 'docker push jsh0911/spring-petclinic:latest'
+        sh 'docker push josohyun/spring-petclinic:latest'
       }
     }
     stage('Docker Image Remove') {
