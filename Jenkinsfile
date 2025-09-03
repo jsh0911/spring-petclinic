@@ -13,7 +13,7 @@ pipeline {
   stages{
     stage('Git Clone'){
       steps {
-        git url: 'https://github.com/sjh4616/spring-petclinic.git', branch: 'main'
+        git url: 'https://github.com/jsh0911/spring-petclinic.git', branch: 'main'
       }
     }
     stage('Maven Build'){
@@ -24,8 +24,8 @@ pipeline {
     stage('Docker Image Create') {
       steps {
         sh """
-        docker build -t s4616/spring-petclinic:$BUILD_NUMBER .
-        docker tag s4616/spring-petclinic:$BUILD_NUMBER s4616/spring-petclinic:latest
+        docker build -t jsh0911/spring-petclinic:$BUILD_NUMBER .
+        docker tag jsh0911/spring-petclinic:$BUILD_NUMBER /spring-petclinic:latest
         """
       }
     }
@@ -36,12 +36,12 @@ pipeline {
     }
     stage('Docker Image Push') {
       steps {
-        sh 'docker push s4616/spring-petclinic:latest'
+        sh 'docker push jsh0911/spring-petclinic:latest'
       }
     }
     stage('Docker Image Remove') {
       steps {
-        sh 'docker rmi s4616/spring-petclinic:$BUILD_NUMBER s4616/spring-petclinic:latest'
+        sh 'docker rmi jsh0911/spring-petclinic:$BUILD_NUMBER jsh0911/spring-petclinic:latest'
       }
     }
     stage('Publish Over SSH') {
@@ -52,7 +52,7 @@ pipeline {
         execCommand: '''
         docker rm -f $(docker ps -aq)
         docker rmi $(docker images -q)
-        docker run -itd -p 8080:8080 --name=spring-petclinic s4616/spring-petclinic:latest
+        docker run -itd -p 8080:8080 --name=spring-petclinic jsh0911/spring-petclinic:latest
         ''', 
         execTimeout: 120000, 
         flatten: false, 
