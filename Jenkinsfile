@@ -25,7 +25,7 @@ pipeline {
       steps {
         sh """
         docker build -t jsh0911/spring-petclinic:$BUILD_NUMBER .
-        docker tag jsh0911/spring-petclinic:$BUILD_NUMBER /spring-petclinic:latest
+        docker tag jsh0911/spring-petclinic:$BUILD_NUMBER jsh0911/spring-petclinic:latest
         """
       }
     }
