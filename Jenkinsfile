@@ -24,8 +24,8 @@ pipeline {
     stage('Docker Image Create') {
       steps {
         sh """
-        docker build -t jsh0911/spring-petclinic:$BUILD_NUMBER .
-        docker tag jsh0911/spring-petclinic:$BUILD_NUMBER jsh0911/spring-petclinic:latest
+        docker build -t josohyun/spring-petclinic:$BUILD_NUMBER .
+        docker tag josohyun/spring-petclinic:$BUILD_NUMBER josohyun/spring-petclinic:latest
         """
       }
     }
