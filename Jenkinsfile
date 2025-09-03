@@ -41,7 +41,7 @@ pipeline {
     }
     stage('Docker Image Remove') {
       steps {
-        sh 'docker rmi jsh0911/spring-petclinic:$BUILD_NUMBER jsh0911/spring-petclinic:latest'
+        sh 'docker rmi josohyun/spring-petclinic:$BUILD_NUMBER josohyun/spring-petclinic:latest'
       }
     }
     stage('Publish Over SSH') {
