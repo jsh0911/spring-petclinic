@@ -52,7 +52,7 @@ pipeline {
         execCommand: '''
         docker rm -f $(docker ps -aq)
         docker rmi $(docker images -q)
-        docker run -itd -p 80:8080 --name=spring-petclinic jsh0911/spring-petclinic:latest
+        docker run -itd -p 8080:80 --name=spring-petclinic jsh0911/spring-petclinic:latest
         ''', 
         execTimeout: 120000, 
         flatten: false, 
