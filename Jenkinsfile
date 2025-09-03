@@ -39,6 +39,30 @@ pipeline {
         sh 'docker push s4616/spring-petclinic:latest'
       }
     }
+    stage('Publish Over SSH') {
+      steps {
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'target', 
+        transfers: [sshTransfer(cleanRemote: false, 
+        excludes: '', 
+        execCommand: '''
+        docker rm -f $(docker ps -aq)
+        docker rmi $(docker images -q)
+        docker run -itd -p 8080:8080 --name=spring-petclinic s4616/spring-petclinic:latest
+        ''', 
+        execTimeout: 120000, 
+        flatten: false, 
+        makeEmptyDirs: false, 
+        noDefaultExcludes: false, 
+        patternSeparator: '[, ]+', 
+        remoteDirectory: '', 
+        remoteDirectorySDF: false, 
+        removePrefix: 'target', 
+        sourceFiles: '')], 
+        usePromotionTimestamp: false, 
+        useWorkspaceInPromotion: false, 
+        verbose: false)])
+      }
+    }
   }
 }
 
